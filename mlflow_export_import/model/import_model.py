@@ -30,10 +30,10 @@ class BaseModelImporter():
         :param run_importer: RunImporter instance.
         :param await_creation_for: Seconds to wait for model version crreation.
         """
-        self.mlflow_client = mlflow_client 
+        self.mlflow_client = mlflow_client
         self.run_importer = run_importer if run_importer else RunImporter(self.mlflow_client, mlmodel_fix=True)
-        self.import_source_tags = import_source_tags 
-        self.await_creation_for = await_creation_for 
+        self.import_source_tags = import_source_tags
+        self.await_creation_for = await_creation_for
 
 
     def _import_version(self, model_name, src_vr, dst_run_id, dst_source, sleep_time):
@@ -46,7 +46,8 @@ class BaseModelImporter():
         """
         src_current_stage = src_vr["current_stage"]
         dst_source = dst_source.replace("file://","") # OSS MLflow
-        if not dst_source.startswith("dbfs:") and not os.path.exists(dst_source):
+        object_storage_filesystem_prefixes = ("dbfs:", "gs:")
+        if not dst_source.startswith(object_storage_filesystem_prefixes) and not os.path.exists(dst_source):
             raise MlflowExportImportException(f"'source' argument for MLflowClient.create_model_version does not exist: {dst_source}")
         kwargs = {"await_creation_for": self.await_creation_for } if self.await_creation_for else {}
         tags = src_vr["tags"]
@@ -214,7 +215,7 @@ def _path_join(x,y):
     """ Account for DOS backslash """
     path = os.path.join(x,y)
     if path.startswith("dbfs:"):
-        path = path.replace("\\","/") 
+        path = path.replace("\\","/")
     return path
 
 
