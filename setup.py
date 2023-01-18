@@ -2,6 +2,7 @@ from setuptools import setup, find_packages
 
 CORE_REQUIREMENTS = [
     "mlflow-skinny>=1.14.0",
+    "pandas>=1.3.5",
     "wheel"
 ]
 
