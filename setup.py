@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 CORE_REQUIREMENTS = [
-    "mlflow>=1.28.0",
+    "mlflow-skinny>=1.14.0",
     "wheel"
 ]
 
@@ -10,7 +10,7 @@ TEST_REQUIREMENTS = [
     "pytest-html",
     "shortuuid"
 ]
-  
+
 setup(
     name="mlflow_export_import",
     version = "1.1.2",
@@ -21,13 +21,13 @@ setup(
     url = "https://github.com/mlflow/mlflow-export-import",
     project_urls={
         "Bug Tracker": "https://github.com/mlflow/mlflow-export-import/issues",
-        "Documentation": "https://github.com/mlflow/mlflow-export-import/blob/master/README.md", 
+        "Documentation": "https://github.com/mlflow/mlflow-export-import/blob/master/README.md",
         "Source Code": "https://github.com/mlflow/mlflow-export-import/"
     },
     python_requires = ">=3.8",
     packages = find_packages(),
     zip_safe = False,
-    install_requires = CORE_REQUIREMENTS + TEST_REQUIREMENTS,
+    install_requires = CORE_REQUIREMENTS,
     license = "Apache License 2.0",
     keywords = "mlflow ml ai",
     classifiers = [
